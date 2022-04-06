@@ -8,4 +8,10 @@ contract StringStorage {
     function majPhrase(string memory _phrase) public {
         phrase = _phrase;
     }
+
+    function getPhrase() view public returns(string memory) {
+        return phrase;
+    }
+
+
 }

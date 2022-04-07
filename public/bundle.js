@@ -48,4 +48,6 @@ const stringStorage = new web3.eth.Contract(
   stringStorageAddress
 );
 
-document.addEventListener("DOMContentLoaded", () => {});
+document.addEventListener("DOMContentLoaded", () => {
+    const 
+});

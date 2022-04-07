@@ -41,7 +41,7 @@ const stringStorageABI = [
     constant: true,
   },
 ];
-const stringStorageAddress = " 0x0225a4a155e519396C409189f16295f21288ED26";
+const stringStorageAddress = "0x0225a4a155e519396C409189f16295f21288ED26";
 const web3 = new Web3("http://localhost:9545");
 const stringStorage = new web3.eth.Contract(
   stringStorageABI,
@@ -49,7 +49,7 @@ const stringStorage = new web3.eth.Contract(
 );
 
 document.addEventListener("DOMContentLoaded", () => {
-  const $setPhrase = document.getElementById("setPhrase");
+  const $majPhrase = document.getElementById("setPhrase");
   const $phrase = document.getElementById("phrase");
   let accounts = [];
 
@@ -57,14 +57,23 @@ document.addEventListener("DOMContentLoaded", () => {
     accounts = _accounts;
   });
 
-  const getPhrase = () => {
+  const $getPhrase = () => {
     stringStorage.methods
-      .$phrase()
+      .getPhrase()
       .call()
       .then((result) => {
         $phrase.innerHTML = result;
       });
   };
 
-  getPhrase();
+  $getPhrase();
+
+  $majPhrase.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const $phrase = e.target.elements[0].value;
+    stringStorage.methods
+      .majPhrase(phrase)
+      .send({ from: accounts[0] })
+      .then($getPhrase);
+  });
 });

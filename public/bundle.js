@@ -49,5 +49,22 @@ const stringStorage = new web3.eth.Contract(
 );
 
 document.addEventListener("DOMContentLoaded", () => {
-    const 
+  const $setPhrase = document.getElementById("setPhrase");
+  const $phrase = document.getElementById("phrase");
+  let accounts = [];
+
+  web3.eth.getAccounts().then((_accounts) => {
+    accounts = _accounts;
+  });
+
+  const getPhrase = () => {
+    stringStorage.methods
+      .$phrase()
+      .call()
+      .then((result) => {
+        $phrase.innerHTML = result;
+      });
+  };
+
+  getPhrase();
 });
